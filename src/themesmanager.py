@@ -1,7 +1,7 @@
 from functools import partial
 import os
 import re
-from PyQt5.QtWidgets import QAction, QActionGroup
+from PyQt5.QtWidgets import QAction, QActionGroup, QMenu
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtGui import QPixmap
 from constants import Constants, ThemeConstants
@@ -141,6 +141,7 @@ class ThemeManager:
         Display a QMessageBox if the theme folder is not found."""
         themes = []
         ag = QActionGroup(self._owner, exclusive=True)
+        themes_menu = self._owner.settings_menu.addMenu("Themes")
         if os.path.exists(ThemeConstants.FOLDER):
             for theme_folder in sorted(os.listdir(ThemeConstants.FOLDER)):
                 relative_folder = os.path.join(ThemeConstants.FOLDER, theme_folder)
@@ -156,7 +157,7 @@ class ThemeManager:
                         checkable=True
                     )
                 )
-                self._owner.menu_themes.addAction(new_theme)
+                themes_menu.addAction(new_theme)
                 self._theme_names[theme_name.lstrip('&')] = new_theme
                 new_theme.triggered.connect(partial(self._apply, theme_path))
         else:

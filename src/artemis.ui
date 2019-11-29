@@ -9516,11 +9516,6 @@ QSlider::handle:horizontal {
     <addaction name="action_update_database"/>
     <addaction name="action_check_software_version"/>
    </widget>
-   <widget class="QMenu" name="menu_themes">
-    <property name="title">
-     <string>Themes</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="menuSigidwiki">
     <property name="title">
      <string>Sigidwiki</string>
@@ -9537,10 +9532,16 @@ QSlider::handle:horizontal {
     <addaction name="action_rtl_sdr_com"/>
     <addaction name="action_github"/>
    </widget>
+   <widget class="QMenu" name="settings_menu">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="action_font"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuUpdates"/>
-   <addaction name="menu_themes"/>
    <addaction name="menuSigidwiki"/>
+   <addaction name="settings_menu"/>
    <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
@@ -9596,6 +9597,21 @@ QSlider::handle:horizontal {
   <action name="action_check_software_version">
    <property name="text">
     <string>Check software version</string>
+   </property>
+  </action>
+  <action name="action_themes">
+   <property name="text">
+    <string>Themes</string>
+   </property>
+  </action>
+  <action name="action_font">
+   <property name="text">
+    <string>Font</string>
+   </property>
+  </action>
+  <action name="actionThemes">
+   <property name="text">
+    <string>Themes</string>
    </property>
   </action>
  </widget>
