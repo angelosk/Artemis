@@ -1,5 +1,6 @@
 from functools import partial
 import hashlib
+import json
 from PyQt5.QtWidgets import QMessageBox
 from constants import Constants, Signal
 
@@ -175,3 +176,22 @@ def safe_cast(value, cast_type, default=-1):
         r = default
     finally:
         return r
+
+
+def save_font(font):
+    """Serialize a QFont object as a json."""
+    with open(Constants.FONT_FILE, mode='w') as font_file:
+        json.dump(
+            {
+                'family': font.family(),
+                'style': font.style(),
+                'point_size': font.pointSize(),
+                'weight': font.weight(),
+                'italic': font.italic(),
+                'strikeout': font.strikeOut(),
+                'underline': font.underline(),
+            },
+            font_file,
+            sort_keys=True,
+            indent=4
+        )

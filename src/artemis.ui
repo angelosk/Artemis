@@ -6949,7 +6949,9 @@ STORM</string>
                           <property name="font">
                            <font>
                             <pointsize>13</pointsize>
+                            <weight>75</weight>
                             <italic>false</italic>
+                            <bold>true</bold>
                            </font>
                           </property>
                           <property name="layoutDirection">
@@ -6977,7 +6979,9 @@ STORM</string>
                           <property name="font">
                            <font>
                             <pointsize>13</pointsize>
+                            <weight>75</weight>
                             <italic>false</italic>
+                            <bold>true</bold>
                            </font>
                           </property>
                           <property name="layoutDirection">
@@ -7005,7 +7009,9 @@ STORM</string>
                           <property name="font">
                            <font>
                             <pointsize>13</pointsize>
+                            <weight>75</weight>
                             <italic>false</italic>
+                            <bold>true</bold>
                            </font>
                           </property>
                           <property name="layoutDirection">
@@ -7033,7 +7039,9 @@ STORM</string>
                           <property name="font">
                            <font>
                             <pointsize>13</pointsize>
+                            <weight>75</weight>
                             <italic>false</italic>
+                            <bold>true</bold>
                            </font>
                           </property>
                           <property name="layoutDirection">
@@ -7061,7 +7069,9 @@ STORM</string>
                           <property name="font">
                            <font>
                             <pointsize>13</pointsize>
+                            <weight>75</weight>
                             <italic>false</italic>
+                            <bold>true</bold>
                            </font>
                           </property>
                           <property name="layoutDirection">
@@ -7092,7 +7102,9 @@ STORM</string>
                           <property name="font">
                            <font>
                             <pointsize>13</pointsize>
+                            <weight>75</weight>
                             <italic>false</italic>
+                            <bold>true</bold>
                            </font>
                           </property>
                           <property name="layoutDirection">
@@ -7120,7 +7132,9 @@ STORM</string>
                           <property name="font">
                            <font>
                             <pointsize>13</pointsize>
+                            <weight>75</weight>
                             <italic>false</italic>
+                            <bold>true</bold>
                            </font>
                           </property>
                           <property name="layoutDirection">
@@ -7148,7 +7162,9 @@ STORM</string>
                           <property name="font">
                            <font>
                             <pointsize>13</pointsize>
+                            <weight>75</weight>
                             <italic>false</italic>
+                            <bold>true</bold>
                            </font>
                           </property>
                           <property name="layoutDirection">
@@ -7176,7 +7192,9 @@ STORM</string>
                           <property name="font">
                            <font>
                             <pointsize>13</pointsize>
+                            <weight>75</weight>
                             <italic>false</italic>
+                            <bold>true</bold>
                            </font>
                           </property>
                           <property name="layoutDirection">

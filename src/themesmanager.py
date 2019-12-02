@@ -1,7 +1,7 @@
 from functools import partial
 import os
 import re
-from PyQt5.QtWidgets import QAction, QActionGroup, QMenu
+from PyQt5.QtWidgets import QAction, QActionGroup
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtGui import QPixmap
 from constants import Constants, ThemeConstants
@@ -142,27 +142,27 @@ class ThemeManager:
         themes = []
         ag = QActionGroup(self._owner, exclusive=True)
         themes_menu = self._owner.settings_menu.addMenu("Themes")
-        if os.path.exists(ThemeConstants.FOLDER):
-            for theme_folder in sorted(os.listdir(ThemeConstants.FOLDER)):
-                relative_folder = os.path.join(ThemeConstants.FOLDER, theme_folder)
-                if os.path.isdir(os.path.abspath(relative_folder)):
-                    relative_folder = os.path.join(ThemeConstants.FOLDER, theme_folder)
-                    themes.append(relative_folder)
-            for theme_path in themes:
-                theme_name = '&' + self._pretty_name(os.path.basename(theme_path))
-                new_theme = ag.addAction(
-                    QAction(
-                        theme_name,
-                        self._owner,
-                        checkable=True
-                    )
-                )
-                themes_menu.addAction(new_theme)
-                self._theme_names[theme_name.lstrip('&')] = new_theme
-                new_theme.triggered.connect(partial(self._apply, theme_path))
-        else:
+        if not os.path.exists(ThemeConstants.FOLDER):
             pop_up(self._owner, title=ThemeConstants.THEME_FOLDER_NOT_FOUND,
                    text=ThemeConstants.MISSING_THEME_FOLDER).show()
+            return
+        for theme_folder in sorted(os.listdir(ThemeConstants.FOLDER)):
+            relative_folder = os.path.join(ThemeConstants.FOLDER, theme_folder)
+            if os.path.isdir(os.path.abspath(relative_folder)):
+                relative_folder = os.path.join(ThemeConstants.FOLDER, theme_folder)
+                themes.append(relative_folder)
+        for theme_path in themes:
+            theme_name = '&' + self._pretty_name(os.path.basename(theme_path))
+            new_theme = ag.addAction(
+                QAction(
+                    theme_name,
+                    self._owner,
+                    checkable=True
+                )
+            )
+            themes_menu.addAction(new_theme)
+            self._theme_names[theme_name.lstrip('&')] = new_theme
+            new_theme.triggered.connect(partial(self._apply, theme_path))
 
     def _change(self):
         """Change the current theme.

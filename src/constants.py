@@ -181,6 +181,7 @@ class Constants:
     DEFAULT_IMGS_FOLDER     = os.path.join(":", "pics", "default_pics")
     DEFAULT_NOT_SELECTED    = os.path.join(DEFAULT_IMGS_FOLDER, NOT_SELECTED)
     DEFAULT_NOT_AVAILABLE   = os.path.join(DEFAULT_IMGS_FOLDER, NOT_AVAILABLE)
+    FONT_FILE               = os.path.join(__BASE_FOLDER__, 'font.json')
 
 
 class Messages:

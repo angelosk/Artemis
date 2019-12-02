@@ -4,8 +4,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 The first release is [3.0.0] because this is actually the third major version (completely rewritten) of the software.
 
 ## [Unreleased]
-...
-
+- Fix a bug in the space weather. An inactive k-index caused a crash.
+- The default font can be changed ([#14](https://github.com/AresValley/Artemis/pull/14))
+- Move `Themes` into `Settings`.
 
 ## [3.1.0] - 2019-10-21
 ### Added

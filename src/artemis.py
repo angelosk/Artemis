@@ -1,5 +1,7 @@
 from collections import namedtuple
+from itertools import chain
 from functools import partial
+import json
 import webbrowser
 import os
 import sys
@@ -15,8 +17,10 @@ from PyQt5.QtWidgets import (
     QListWidgetItem,
     QMessageBox,
     QSplashScreen,
+    QFontDialog,
+    QWidget,
 )
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QFont
 from PyQt5 import uic
 from PyQt5.QtCore import (
     QFileInfo,
@@ -46,6 +50,7 @@ from utilities import (
     is_undef_band,
     format_numbers,
     safe_cast,
+    save_font,
 )
 from executable_utilities import IS_BINARY, resource_path
 from os_utilities import IS_MAC
@@ -101,6 +106,7 @@ class Artemis(QMainWindow, Ui_MainWindow):
         self.action_github.triggered.connect(
             lambda: webbrowser.open(Constants.GITHUB_REPO)
         )
+        self.action_font.triggered.connect(self.start_font_selection)
         self.db = None
         self.current_signal_name = ''
         self.signal_names = []
@@ -206,8 +212,63 @@ class Artemis(QMainWindow, Ui_MainWindow):
 
         # Final operations.
         self.theme_manager.start()
+        self.load_font()
         self.load_db()
         self.display_signals()
+
+    def apply_font(self, font):
+        """Apply a given QFont object to all the widgets."""
+        # This is the smaller-text label. Not the most general strategy, but whatever..
+        smaller_point_size = self.forecast_today_0_lbl.font().pointSize()
+        for w in chain(self.findChildren(QWidget), self.download_window.findChildren(QWidget)):
+            old_font = w.font()
+            is_underlined = old_font.underline()
+            is_bold = old_font.bold()
+            is_italic = old_font.italic()
+            point_size = old_font.pointSize()
+            new_font = QFont(font)
+            new_font.setUnderline(is_underlined)
+            new_font.setBold(is_bold)
+            new_font.setItalic(is_italic)
+            new_font.setPointSize(font.pointSize() + (point_size - smaller_point_size))
+            w.setFont(new_font)
+
+    def load_font(self):
+        """Load (and apply) a QFont object if present."""
+        if not os.path.exists(Constants.FONT_FILE):
+            return
+        with open(Constants.FONT_FILE, mode='r') as font_file:
+            try:
+                font_data = json.load(font_file)
+            except Exception:  # Invalid file
+                pass
+        font = QFont(
+            font_data['family'],
+            font_data['point_size'],
+            font_data['weight'],
+            font_data['italic']
+        )
+        font.setStyle(font_data['style'])
+        font.setPointSize(font_data['point_size'])
+        font.setStrikeOut(font_data['strikeout'])
+        font.setUnderline(font_data['underline'])
+        self.apply_font(font)
+
+    @pyqtSlot()
+    def start_font_selection(self):
+        """Open a font selection widget and apply the selected font."""
+        initial_font = self.description_text.font()
+        dialog = QFontDialog()
+        dialog.setCurrentFont(initial_font)
+        font, ok = dialog.getFont(
+            initial_font,
+            self,
+            "Choose a font",
+            options=QFontDialog.DontUseNativeDialog
+        )
+        if ok:
+            self.apply_font(font)
+            save_font(font)
 
     def action_after_download(self):
         """Decide what to do after a successful download.
